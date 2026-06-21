@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كتالوج الكورسات | Pioneers Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@500;600;700&family=Cairo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     EDIT ZONE #1 — التوكنز (الألوان والخطوط)
+     ============================================================ */
+  :root{
+    --paper:        #F6F1E4;
+    --paper-line:   #E4DABF;
+    --tab-inactive: #ECE3CC;
+    --ink:          #21344B;
+    --ink-soft:     #4A5A70;
+    --teal:         #2F6358;
+    --teal-dark:    #213F38;
+    --gold:         #C99A3B;
+    --stamp-red:    #A23B3B;
+    --card:         #FFFCF5;
+    --shadow:       rgba(33,52,75,0.16);
+    --radius:       14px;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Cairo', sans-serif;
+    background-image:
+      radial-gradient(circle at 1px 1px, var(--paper-line) 1px, transparent 1px);
+    background-size:22px 22px;
+  }
+  .ltr-label{ direction:ltr; unicode-bidi:isolate; font-family:'IBM Plex Mono', monospace; }
+
+  /* ---------- Hero / غلاف الكتالوج ---------- */
+  .hero{
+    max-width:1100px; margin:0 auto; padding:48px 24px 28px;
+    text-align:center; position:relative;
+  }
+  .seal{
+    width:96px; height:96px; margin:0 auto 18px; border-radius:50%;
+    border:3px double var(--teal); display:flex; flex-direction:column;
+    align-items:center; justify-content:center; color:var(--teal);
+    transform:rotate(-6deg); background:var(--card);
+    box-shadow:0 4px 10px var(--shadow);
+  }
+  .seal strong{ font-family:'IBM Plex Mono',monospace; font-size:20px; letter-spacing:1px; }
+  .seal span{ font-family:'IBM Plex Mono',monospace; font-size:7px; letter-spacing:1.5px; margin-top:2px; }
+  .hero h1{
+    font-family:'Markazi Text', serif; font-weight:700; font-size:clamp(30px,5vw,46px);
+    margin:0 0 10px; color:var(--ink);
+  }
+  .hero p{
+    font-size:16px; color:var(--ink-soft); max-width:520px; margin:0 auto; line-height:1.8;
+  }
+
+  /* ---------- Tabs (تبويبات الملف) ---------- */
+  .tabs{
+    max-width:1100px; margin:0 auto; padding:0 24px 6px;
+    display:flex; gap:6px; overflow-x:auto;
+  }
+  .tab{
+    font-family:'Cairo',sans-serif; font-weight:600; font-size:14px;
+    background:var(--tab-inactive); color:var(--ink-soft);
+    border:1px solid var(--paper-line); border-bottom:none;
+    padding:10px 18px; border-radius:10px 10px 0 0; cursor:pointer;
+    white-space:nowrap; transition:background .15s, color .15s, transform .15s;
+  }
+  .tab:hover{ transform:translateY(-2px); }
+  .tab.active{ background:var(--card); color:var(--teal-dark); position:relative; top:1px; }
+  .tab:focus-visible{ outline:3px solid var(--gold); outline-offset:2px; }
+
+  /* ---------- Grid ---------- */
+  .shelf{
+    max-width:1100px; margin:0 auto; padding:18px 24px 140px;
+    border-top:1px solid var(--paper-line);
+  }
+  .grid{
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
+    gap:22px; padding-top:22px;
+  }
+
+  /* ---------- بطاقة الفهرسة (index card) ---------- */
+  .card{
+    background:var(--card); border-radius:var(--radius);
+    box-shadow:0 6px 16px var(--shadow);
+    position:relative; padding:22px 20px 20px;
+    border:1px solid var(--paper-line);
+    transition:transform .18s, box-shadow .18s;
+    display:flex; flex-direction:column;
+  }
+  .card:hover{ transform:translateY(-4px); box-shadow:0 12px 24px var(--shadow); }
+  .card::before, .card::after{ /* ثقوب الفهرسة */
+    content:''; position:absolute; top:14px; width:9px; height:9px;
+    border-radius:50%; background:var(--paper);
+    box-shadow:inset 0 1px 3px rgba(0,0,0,.25);
+  }
+  .card::before{ right:18px; }
+  .card::after{ right:34px; }
+  .card .corner{ /* طية الزاوية */
+    position:absolute; left:0; bottom:0; width:0; height:0;
+    border-style:solid; border-width:0 0 20px 20px;
+    border-color:transparent transparent var(--paper-line) transparent;
+    border-radius:0 0 0 var(--radius);
+  }
+  .card .tag{
+    display:inline-block; font-size:11px; font-weight:600; color:var(--teal-dark);
+    background:rgba(47,99,88,.08); padding:4px 10px; border-radius:20px;
+    margin-bottom:10px; letter-spacing:.5px;
+  }
+  .card h3{ font-family:'Markazi Text',serif; font-size:24px; margin:0 0 2px; color:var(--ink); }
+  .card .title-en{ font-size:12px; color:var(--ink-soft); margin:0 0 10px; }
+  .card p.desc{ font-size:14px; line-height:1.7; color:var(--ink-soft); margin:0 0 14px; flex-grow:0; }
+
+  /* ختم تقييم المدرس */
+  .teacher-row{ display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+  .stamp{
+    flex-shrink:0; width:58px; height:58px; border-radius:50%;
+    border:2px solid var(--stamp-red); color:var(--stamp-red);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    transform:rotate(-8deg); opacity:.85;
+  }
+  .stamp .stars{ font-size:10px; letter-spacing:1px; }
+  .stamp .stamp-label{ font-size:6px; font-family:'IBM Plex Mono',monospace; letter-spacing:1px; margin-top:1px; }
+  .teacher-info p{ margin:0; }
+  .teacher-info .t-name{ font-weight:700; font-size:14px; color:var(--ink); }
+  .teacher-info .t-role{ font-size:11px; color:var(--ink-soft); }
+
+  .price-tag{
+    display:inline-flex; align-items:center; gap:6px; font-weight:700; font-size:14px;
+    color:var(--teal-dark); background:rgba(201,154,59,.15); border:1px dashed var(--gold);
+    padding:6px 12px; border-radius:8px; margin-bottom:14px; align-self:flex-start;
+  }
+
+  /* أكورديون محتوى الكورس */
+  details.content-acc{ border-top:1px dashed var(--paper-line); padding-top:10px; margin-bottom:12px; }
+  details.content-acc summary{
+    cursor:pointer; list-style:none; font-weight:700; font-size:13px;
+    color:var(--teal-dark); display:flex; align-items:center; justify-content:space-between;
+  }
+  details.content-acc summary::-webkit-details-marker{ display:none; }
+  details.content-acc summary::after{ content:'⌄'; font-size:16px; transition:transform .2s; }
+  details.content-acc[open] summary::after{ transform:rotate(180deg); }
+  details.content-acc ul{ margin:10px 0 0; padding-right:18px; font-size:13px; color:var(--ink-soft); line-height:1.9; }
+
+  /* صندوق الفيديو */
+  .video-box{
+    background:repeating-linear-gradient(90deg, var(--teal-dark) 0 10px, var(--ink) 10px 20px);
+    border-radius:8px; padding:3px; margin-bottom:16px;
+  }
+  .video-inner{
+    background:#0F1B22; border-radius:6px; min-height:90px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    color:#D9CFB0; gap:4px; padding:10px;
+  }
+  .video-inner .play{ font-size:22px; }
+  .video-inner small{ font-size:11px; opacity:.75; text-align:center; }
+
+  .select-btn{
+    margin-top:auto; width:100%; padding:11px 0; border-radius:8px; border:none;
+    background:var(--teal); color:#fff; font-family:'Cairo',sans-serif; font-weight:700;
+    font-size:14px; cursor:pointer; transition:background .15s, transform .12s;
+  }
+  .select-btn:hover{ background:var(--teal-dark); }
+  .select-btn:focus-visible{ outline:3px solid var(--gold); outline-offset:2px; }
+  .select-btn.selected{ background:var(--stamp-red); }
+  .select-btn.selected::before{ content:'✓ '; }
+
+  /* بطاقة "قريبًا" */
+  .card.soon{ opacity:.6; }
+  .card.soon .select-btn{ background:var(--ink-soft); cursor:not-allowed; }
+  .card.soon::after{ content:'🔒'; position:absolute; left:18px; top:18px; }
+
+  .selected-stamp{
+    position:absolute; top:14px; left:14px; background:var(--stamp-red); color:#fff;
+    font-size:11px; font-weight:700; padding:4px 10px; border-radius:6px;
+    transform:rotate(-6deg); animation:stamp-in .25s ease-out;
+  }
+  @keyframes stamp-in{ from{ transform:rotate(-6deg) scale(1.6); opacity:0; } to{ transform:rotate(-6deg) scale(1); opacity:1; } }
+
+  /* شريط الاختيار السفلي */
+  .bottom-bar{
+    position:fixed; bottom:0; left:0; right:0; background:var(--ink);
+    color:#fff; padding:14px 20px calc(14px + env(safe-area-inset-bottom));
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    box-shadow:0 -6px 18px rgba(0,0,0,.25); transform:translateY(110%);
+    transition:transform .25s ease-out; z-index:50; flex-wrap:wrap;
+  }
+  .bottom-bar.show{ transform:translateY(0); }
+  .bottom-bar .info{ font-size:13px; line-height:1.6; }
+  .bottom-bar .info b{ color:var(--gold); }
+  .bottom-bar .actions{ display:flex; gap:10px; align-items:center; }
+  .bottom-bar a.confirm{
+    background:var(--gold); color:var(--ink); text-decoration:none; font-weight:700;
+    font-size:14px; padding:9px 16px; border-radius:8px;
+  }
+  .bottom-bar button.clear{
+    background:transparent; border:1px solid rgba(255,255,255,.4); color:#fff;
+    border-radius:8px; padding:9px 12px; cursor:pointer; font-size:13px;
+  }
+
+  @media (max-width:480px){
+    .hero{ padding:36px 18px 20px; }
+    .bottom-bar{ flex-direction:column; align-items:flex-start; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="seal"><strong>PA</strong><span>ACADEMY</span></div>
+  <h1>كتالوج كورسات Pioneers Academy</h1>
+  <p>اطّلع على الكورسات المتاحة، تقييم المدرس، ومحتوى كل كورس بالتفصيل — واختار اللي يناسب طفلك.</p>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button class="tab active" data-filter="all">الكل</button>
+  <button class="tab" data-filter="foundation">تأسيس</button>
+  <button class="tab" data-filter="english">English</button>
+  <button class="tab" data-filter="arabic">عربي</button>
+  <button class="tab" data-filter="languages">لغات أخرى</button>
+  <button class="tab" data-filter="programming">برمجة</button>
+  <button class="tab" data-filter="new">كورسات جديدة</button>
+</nav>
+
+<main class="shelf">
+  <div class="grid" id="grid"></div>
+</main>
+
+<div class="bottom-bar" id="bottomBar">
+  <div class="info">تم اختيار <b id="countLabel">0</b> كورس(ات): <span id="namesLabel"></span></div>
+  <div class="actions">
+    <button class="clear" id="clearBtn">إلغاء الكل</button>
+    <a class="confirm" id="confirmBtn" href="#" target="_blank" rel="noopener">تواصل للتسجيل</a>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   EDIT ZONE #2 — بيانات الكورسات
+   عدّلي هنا: اسم المدرس، التقييم (1-5)، محتوى الكورس، ورابط الفيديو
+   لما يكون جاهز. اسيبي videoUrl فاضي لحد ما يكون عندك اللينك.
+   ============================================================ */
+const COURSES = [
+  {
+    id:'oxford-phonics', category:'foundation',
+    titleAr:'تأسيس أوكسفورد فونيكس', titleEn:'Oxford Phonics Foundation',
+    tag:'FOUNDATION · BEGINNERS',
+    description:'تأسيس قوي في نطق وقراءة الحروف والكلمات الإنجليزية للمبتدئين، قبل الدخول في الجرامر.',
+    teacher:'اسم المدرس/ة', rating:5, price:'السعر هنا (مثال: 250 جنيه/شهريًا)',
+    syllabus:[
+      'أصوات الحروف وربطها بالكلمات',
+      'تمارين نطق وقراءة تدريجية',
+      'أنشطة وألعاب صوتية',
+      'تقييم قراءة بسيط لكل وحدة'
+    ],
+    videoUrl:''
+  },
+  {
+    id:'general-foundation', category:'foundation',
+    titleAr:'تأسيس عام (عربي - ماث - إنجليزي)', titleEn:'General Foundation – Arabic, Math & English',
+    tag:'FOUNDATION LEVEL',
+    description:'كورس تأسيسي شامل للمهارات الأساسية في اللغة العربية والرياضيات والإنجليزي للمراحل الأولى.',
+    teacher:'اسم المدرس/ة', rating:5, price:'السعر هنا (مثال: 250 جنيه/شهريًا)',
+    syllabus:[
+      'تأسيس قراءة وكتابة عربي',
+      'تأسيس أرقام وعمليات حسابية بسيطة',
+      'تأسيس مفردات وجمل إنجليزي',
+      'أنشطة مراجعة مدمجة بين المواد الثلاثة'
+    ],
+    videoUrl:''
+  },
+  {
+    id:'geo-history-foundation', category:'foundation',
+    titleAr:'تأسيس جغرافيا وتاريخ', titleEn:'Geography & History Foundation',
+    tag:'FOUNDATION LEVEL',
+    description:'تأسيس مبسط لمفاهيم الجغرافيا والتاريخ بأسلوب قصصي وأنشطة بصرية مناسبة للمراحل الأولى.',
+    teacher:'اسم المدرس/ة', rating:5, price:'السعر هنا (مثال: 250 جنيه/شهريًا)',
+    syllabus:[
+      'مفاهيم جغرافية أساسية (خريطة، اتجاهات، بيئات)',
+      'قصص وأحداث تاريخية مبسطة',
+      'أنشطة وخرائط تفاعلية',
+      'مراجعة ختامية لكل وحدة'
+    ],
+    videoUrl:''
+  },
+  {
+    id:'math-games-foundation', category:'foundation',
+    titleAr:'تأسيس الماث بالـ Games', titleEn:'Math Through Games',
+    tag:'LEVEL 1 → PRO',
+    description:'تعليم الرياضيات بطريقة الألعاب التفاعلية، متدرج من المستوى الأول حتى الاحتراف.',
+    teacher:'اسم المدرس/ة', rating:5, price:'السعر هنا (مثال: 250 جنيه/شهريًا)',
+    syllabus:[
+      'المستوى 1: الأرقام والعد باللعب',
+      'مستويات متوسطة: عمليات حسابية وأنماط',
+      'مستويات متقدمة: مسائل ومنطق رياضي',
+      'مستوى الاحتراف: تحديات وألعاب تنافسية'
+    ],
+    videoUrl:''
+  },
+  {
+    id:'french', category:'languages',
+    titleAr:'اللغة الفرنسية', titleEn:'French',
+    tag:'ALL LEVELS',
+    description:'تأسيس وتعلّم اللغة الفرنسية من الصفر بطريقة تفاعلية وممتعة.',
+    teacher:'اسم المدرس/ة', rating:5, price:'السعر هنا (مثال: 250 جنيه/شهريًا)',
+    syllabus:[
+      'مفردات وجمل أساسية',
+      'تمارين نطق ومحادثة',
+      'قواعد مبسطة بالأمثلة',
+      'أنشطة وألعاب تفاعلية'
+    ],
+    videoUrl:''
+  },
+  {
+    id:'german', category:'languages',
+    titleAr:'اللغة الألمانية', titleEn:'German',
+    tag:'ALL LEVELS',
+    description:'تأسيس وتعلّم اللغة الألمانية من الصفر بطريقة تفاعلية وممتعة.',
+    teacher:'اسم المدرس/ة', rating:5, price:'السعر هنا (مثال: 250 جنيه/شهريًا)',
+    syllabus:[
+      'مفردات وجمل أساسية',
+      'تمارين نطق ومحادثة',
+      'قواعد مبسطة بالأمثلة',
+      'أنشطة وألعاب تفاعلية'
+    ],
+    videoUrl:''
+  },
+  {
+    id:'oxford-discover', category:'english',
+    titleAr:'أكسفورد ديسكفر جرامر', titleEn:'Oxford Discover Grammar',
+    tag:'LEVELS 1–6 · AGES 6–12',
+    description:'منهج إنجليزي تفاعلي لتعليم الجرامر بالأمثلة والأنشطة، من المستوى الأول للسادس.',
+    teacher:'اسم المدرس/ة', rating:5, price:'السعر هنا (مثال: 250 جنيه/شهريًا)',
+    syllabus:[
+      'شرح الدرس بالفيديو والصور',
+      '8 أنواع تمارين تفاعلية لكل موديول',
+      'تبويب فيديوهات تعليمية',
+      '3 ألعاب: Memory Match، Drag & Sort، Speed Challenge',
+      'كويز نهائي بنتيجة فورية'
+    ],
+    videoUrl:''
+  },
+  {
+    id:'close-up', category:'english',
+    titleAr:'كلوز أب', titleEn:'Close Up',
+    tag:'SECONDARY LEVELS',
+    description:'منهج إنجليزي شامل لمهارات القراءة والكتابة والاستماع والمحادثة للمراحل الأكبر.',
+    teacher:'اسم المدرس/ة', rating:5, price:'السعر هنا (مثال: 250 جنيه/شهريًا)',
+    syllabus:[
+      'وحدات قراءة وكتابة متكاملة',
+      'تمارين قواعد ومفردات',
+      'أنشطة استماع ومحادثة',
+      'تقييم في نهاية كل وحدة'
+    ],
+    videoUrl:''
+  },
+  {
+    id:'arabic-grammar', category:'arabic',
+    titleAr:'النحو والصرف العربي', titleEn:'Arabic Grammar',
+    tag:'كل المراحل',
+    description:'منهج عربي متدرج لقواعد النحو والصرف بأسلوب مبسط مع تطبيقات وتدريبات.',
+    teacher:'اسم المدرس/ة', rating:5, price:'السعر هنا (مثال: 250 جنيه/شهريًا)',
+    syllabus:[
+      'شرح مبسط لقواعد النحو والصرف',
+      'نصوص قرائية وتطبيقات',
+      'تمارين تفاعلية متدرجة',
+      'اختبارات تقييمية دورية'
+    ],
+    videoUrl:''
+  },
+  {
+    id:'programming-track', category:'programming',
+    titleAr:'مسار البرمجة المتكامل', titleEn:'Programming Track',
+    tag:'AGES 7–17 · 4 STAGES',
+    description:'مسار متكامل من سكراتش للذكاء الاصطناعي، على 4 مراحل مرتبة حسب السن.',
+    teacher:'اسم المدرس/ة', rating:5, price:'السعر هنا (مثال: 250 جنيه/شهريًا)',
+    syllabus:[
+      'المرحلة 1: Scratch (7–9 سنوات)',
+      'المرحلة 2: HTML / CSS / JS (9–12 سنة)',
+      'المرحلة 3: Python (12–15 سنة)',
+      'المرحلة 4: OOP / APIs / AI (15–17 سنة)',
+      'دليل معلم كامل لكل مرحلة'
+    ],
+    videoUrl:''
+  },
+  { id:'coming-1', category:'new', comingSoon:true, titleAr:'كورس جديد', titleEn:'New Course', tag:'TBA',
+    description:'تفاصيل الكورس هتضاف قريبًا.', teacher:'', rating:0, syllabus:[], videoUrl:'' },
+  { id:'coming-2', category:'new', comingSoon:true, titleAr:'كورس جديد', titleEn:'New Course', tag:'TBA',
+    description:'تفاصيل الكورس هتضاف قريبًا.', teacher:'', rating:0, syllabus:[], videoUrl:'' },
+];
+
+/* رقم الواتساب اللي هتتواصل عليه الأسرة بعد الاختيار — غيّريه برقمك */
+const WHATSAPP_NUMBER = '201000000000';
+/* ============================================================ */
+
+const grid = document.getElementById('grid');
+const selected = new Set();
+
+function starsHtml(n){
+  return '★'.repeat(n) + '☆'.repeat(5-n);
+}
+
+function renderCard(c){
+  const div = document.createElement('div');
+  div.className = 'card' + (c.comingSoon ? ' soon' : '');
+  div.dataset.category = c.category;
+  div.dataset.id = c.id;
+
+  let teacherBlock = '';
+  if(!c.comingSoon){
+    teacherBlock = `
+      <div class="teacher-row">
+        <div class="stamp">
+          <div class="stars">${starsHtml(c.rating)}</div>
+          <div class="stamp-label">تقييم الأكاديمية</div>
+        </div>
+        <div class="teacher-info">
+          <p class="t-name">${c.teacher}</p>
+          <p class="t-role">مدرس/ة الكورس</p>
+        </div>
+      </div>`;
+  }
+
+  let priceBlock = '';
+  if(!c.comingSoon && c.price){
+    priceBlock = `<span class="price-tag">💰 ${c.price}</span>`;
+  }
+
+  let accordion = '';
+  if(!c.comingSoon && c.syllabus.length){
+    accordion = `
+      <details class="content-acc">
+        <summary>محتوى الكورس</summary>
+        <ul>${c.syllabus.map(s=>`<li>${s}</li>`).join('')}</ul>
+      </details>`;
+  }
+
+  let videoBlock = '';
+  if(!c.comingSoon){
+    videoBlock = c.videoUrl
+      ? `<div class="video-box"><div class="video-inner"><iframe style="width:100%;height:140px;border:0;border-radius:4px" src="${c.videoUrl}" allowfullscreen></iframe></div></div>`
+      : `<div class="video-box"><div class="video-inner"><div class="play">🎬</div><small>فيديو من المدرس — هيتم إضافته قريبًا</small></div></div>`;
+  }
+
+  div.innerHTML = `
+    <div class="corner"></div>
+    <span class="tag ltr-label">${c.tag}</span>
+    <h3>${c.titleAr}</h3>
+    <p class="title-en ltr-label">${c.titleEn}</p>
+    <p class="desc">${c.description}</p>
+    ${teacherBlock}
+    ${priceBlock}
+    ${accordion}
+    ${videoBlock}
+    <button class="select-btn" ${c.comingSoon?'disabled':''}>${c.comingSoon?'قريبًا':'اختار الكورس'}</button>
+  `;
+
+  if(!c.comingSoon){
+    const btn = div.querySelector('.select-btn');
+    btn.addEventListener('click', ()=> toggleSelect(c, div, btn));
+  }
+  return div;
+}
+
+function toggleSelect(c, cardEl, btn){
+  if(selected.has(c.id)){
+    selected.delete(c.id);
+    btn.classList.remove('selected');
+    btn.textContent = 'اختار الكورس';
+    const stamp = cardEl.querySelector('.selected-stamp');
+    if(stamp) stamp.remove();
+  } else {
+    selected.add(c.id);
+    btn.classList.add('selected');
+    btn.textContent = 'تم الاختيار';
+    const stamp = document.createElement('div');
+    stamp.className = 'selected-stamp';
+    stamp.textContent = '✓ مُختار';
+    cardEl.appendChild(stamp);
+  }
+  updateBottomBar();
+}
+
+function updateBottomBar(){
+  const bar = document.getElementById('bottomBar');
+  const names = [...selected].map(id => COURSES.find(c=>c.id===id).titleAr);
+  document.getElementById('countLabel').textContent = names.length;
+  document.getElementById('namesLabel').textContent = names.join('، ');
+  const confirmBtn = document.getElementById('confirmBtn');
+  const msg = encodeURIComponent('عايز/ة أسجل في الكورسات التالية: ' + names.join('، '));
+  confirmBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
+  bar.classList.toggle('show', names.length > 0);
+}
+
+document.getElementById('clearBtn').addEventListener('click', ()=>{
+  selected.clear();
+  document.querySelectorAll('.select-btn.selected').forEach(b=>{
+    b.classList.remove('selected'); b.textContent='اختار الكورس';
+  });
+  document.querySelectorAll('.selected-stamp').forEach(s=>s.remove());
+  updateBottomBar();
+});
+
+COURSES.forEach(c => grid.appendChild(renderCard(c)));
+
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    const f = tab.dataset.filter;
+    document.querySelectorAll('.card').forEach(card=>{
+      card.style.display = (f==='all' || card.dataset.category===f) ? '' : 'none';
+    });
+  });
+});
+</script>
+</body>
+</html>
