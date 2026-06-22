@@ -67,16 +67,13 @@
     ::-webkit-scrollbar {
       width: 10px;
     }
-
     ::-webkit-scrollbar-track {
       background: var(--paper);
     }
-
     ::-webkit-scrollbar-thumb {
       background: var(--paper-line);
       border-radius: 5px;
     }
-
     ::-webkit-scrollbar-thumb:hover {
       background: var(--gold);
     }
@@ -101,12 +98,10 @@
       z-index: 100;
       user-select: none;
     }
-
     .theme-toggle:hover {
       transform: translateY(-2px);
       border-color: var(--teal);
     }
-
     .theme-toggle:active {
       transform: translateY(0);
     }
@@ -118,7 +113,6 @@
       padding: 0 24px;
       position: relative;
     }
-
     .search-input {
       width: 100%;
       padding: 12px 46px 12px 18px;
@@ -130,13 +124,11 @@
       font-size: 14px;
       box-shadow: 0 4px 12px var(--shadow);
     }
-
     .search-input:focus {
       outline: none;
       border-color: var(--teal);
       box-shadow: 0 4px 16px var(--shadow);
     }
-
     .search-icon {
       position: absolute;
       right: 38px;
@@ -360,8 +352,7 @@
     .teacher-mini {
       border: 1px solid var(--paper-line);
       border-radius: 10px;
-      padding: 10px 12px 10px 40px;
-      /* Space for selector indicator on the left */
+      padding: 10px 12px 10px 40px; /* Space for selector indicator on the left */
       background: rgba(247, 242, 231, .5);
       position: relative;
       cursor: pointer;
@@ -1004,7 +995,7 @@
     ];
 
     /* رقم الواتساب اللي هتتواصل عليه الأسرة بعد الاختيار — غيّريه برقمك */
-    const WHATSAPP_NUMBER = '201554494763';
+    const WHATSAPP_NUMBER = '201000000000';
     /* ============================================================ */
 
     const grid = document.getElementById('grid');
@@ -1140,7 +1131,7 @@
     function updateBottomBar() {
       const bar = document.getElementById('bottomBar');
       const detailsList = [];
-
+      
       selected.forEach(id => {
         const c = COURSES.find(x => x.id === id);
         if (c) {
@@ -1155,7 +1146,7 @@
 
       document.getElementById('countLabel').textContent = selected.size;
       document.getElementById('namesLabel').textContent = detailsList.join('، ');
-
+      
       const confirmBtn = document.getElementById('confirmBtn');
       const msg = encodeURIComponent('عايز/ة أسجل في الكورسات التالية: ' + detailsList.join('، '));
       confirmBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
@@ -1211,7 +1202,7 @@
         if (!c) return;
 
         const matchesCategory = (categoryFilter === 'all' || c.category === categoryFilter);
-        const matchesSearch = !query ||
+        const matchesSearch = !query || 
           c.titleAr.toLowerCase().includes(query) ||
           c.titleEn.toLowerCase().includes(query) ||
           c.description.toLowerCase().includes(query) ||
